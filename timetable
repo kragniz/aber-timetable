@@ -1,6 +1,18 @@
 #!/usr/bin/env python
 import re
 
+lecture_times = (
+    9,
+    10,
+    11 + 10/60.,
+    12 + 10/60.,
+    13 + 10/60.,
+    14 + 10/60.,
+    15 + 10/60.,
+    16 + 10/60.,
+    17 + 10/60.
+)
+
 if __name__ == '__main__':
     import sys
     args = sys.argv
@@ -14,7 +26,6 @@ if __name__ == '__main__':
             for i, day in enumerate(days):
                 for i, time in enumerate(day.split('\n')[0:12]):
                     if 'Lecture' in time or 'Practical' in time:
-                        print i, time
                         title = re.search(r'<b>([\w\s,]+)</b>', time)
                         if title:
                             print title.group(1)
