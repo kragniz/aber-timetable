@@ -7,10 +7,17 @@ if __name__ == '__main__':
     if len(args) > 0:
         with open(args[1]) as f:
             days = re.findall(
-                    r'<tr>\s*?<td class="bold_label" style="border:1px black dotted" align="center">\w\w\w <br/> \d\d-\d\d-\d\d\d\d</td>.*?</tr>',
+                r'<tr>\s*?'
+                + r'<td class="bold_label" style="border:1px black dotted" align="center">'
+                + r'\w\w\w <br/> \d\d-\d\d-\d\d\d\d</td>.*?</tr>',
                 f.read(), re.DOTALL)
             for i, day in enumerate(days):
-                print day
                 for i, time in enumerate(day.split('\n')[0:12]):
-                    if 'Lecture' in time:
+                    if 'Lecture' in time or 'Practical' in time:
+                        title = re.search(r'<b>(\w+)</b>', time)
+                        if title:
+                            print title.group(1)
+                        location = re.search(r'</b><br/>(.+)<br/></td>', time)
+                        if location:
+                            print location.group(1)
                         print i, time
