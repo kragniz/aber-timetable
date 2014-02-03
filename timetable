@@ -14,10 +14,10 @@ if __name__ == '__main__':
             for i, day in enumerate(days):
                 for i, time in enumerate(day.split('\n')[0:12]):
                     if 'Lecture' in time or 'Practical' in time:
-                        title = re.search(r'<b>(\w+)</b>', time)
+                        print i, time
+                        title = re.search(r'<b>([\w\s,]+)</b>', time)
                         if title:
                             print title.group(1)
                         location = re.search(r'</b><br/>(.+)<br/></td>', time)
                         if location:
                             print location.group(1)
-                        print i, time
