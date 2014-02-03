@@ -9,4 +9,5 @@ if __name__ == '__main__':
             days = re.findall(
                 r'<tr>.+?<td class="bold_label".+?</tr>',
                 f.read(), re.DOTALL)
-            for d in days: print d; print '~~~~~~~~~~~~~~~'
+            for i, day in enumerate(days):
+                for i, time in enumerate(day.split('\n')[2:11]): print i, time
